@@ -12,7 +12,7 @@ function MessagesGetAll(request, response) {
         }
 
         // entry point to buisness logic
-        const sqlQuery = `select * from PakoTest.Messages order by SendTime desc`;
+        const sqlQuery = `select * from Messages order by SendTime desc`;
         connection.query(sqlQuery, (error, rows) => {
             connection.release();
             if (error) {
@@ -34,7 +34,7 @@ function MessagesAddOne(request, response) {
         }
 
         // entry point to buisness logic
-        const sqlInsert = `insert into PakoTest.Messages(MsgSender, MsgRecipient, MsgTitle, MsgBody) values (?,?,?,?)`;
+        const sqlInsert = `insert into Messages(MsgSender, MsgRecipient, MsgTitle, MsgBody) values (?,?,?,?)`;
         const msgSender = request.body['MsgSender'];
         const msgRecipient = request.body['MsgRecipient'];
         const msgTitle = request.body['MsgTitle'];
@@ -60,7 +60,7 @@ function MessagesGetRecipientAll(request, response) {
         }
 
         // entry point to buisness logic
-        const sqlQuery = `select * from PakoTest.Messages where MsgRecipient = ? order by SendTime desc`;
+        const sqlQuery = `select * from Messages where MsgRecipient = ? order by SendTime desc`;
         const msgRecipient = request.body['MsgRecipient'];
         connection.query(mysql.format(sqlQuery, [msgRecipient]), (error, rows) => {
             connection.release();
